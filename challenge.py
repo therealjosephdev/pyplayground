@@ -129,17 +129,17 @@
 
 # Challenge: Gym Membership Cost Calculator 🏋️‍♀️
 
-age = float(input("Enter your age: "))
-premium_plan = input("Do you want the premium plan (Y/N): ").strip().upper()
+# age = float(input("Enter your age: "))
+# premium_plan = input("Do you want the premium plan (Y/N): ").strip().upper()
 
-if age < 18:
-    membership_price = 20
-elif 18 <= age <= 60:
-    membership_price = 40
-else:
-    membership_price = 30
+# if age < 18:
+#     membership_price = 20
+# elif 18 <= age <= 60:
+#     membership_price = 40
+# else:
+#     membership_price = 30
 
-if premium_plan == "Y":
-    membership_price += 15
+# if premium_plan == "Y":
+#     membership_price += 15
 
-print(f"Your monthly membership cost is ${membership_price:.2f}.")
+# print(f"Your monthly membership cost is ${membership_price:.2f}.")
