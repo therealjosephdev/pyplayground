@@ -143,3 +143,166 @@
 #     membership_price += 15
 
 # print(f"Your monthly membership cost is ${membership_price:.2f}.")
+
+# Code Challenge
+# Write a Python program that defines:
+
+# A Vehicle class with attributes like brand and speed.
+# A Car class that inherits from Vehicle and has an additional attribute doors.
+# A Electric class that represents electric functionality (e.g., battery_life).
+# A Tesla class that inherits from both Car and Electric.
+# Instantiate a Tesla object and print out its details.
+
+# Let me know if you want hints or explanations! 🚀
+
+# class Vehicle():
+#     def __init__(self, brand, speed):
+#         self.brand = brand
+#         self.speed = speed
+        
+#     def describe(self):
+#         print(f"It is {self.brand} with a {self.speed}")
+
+# class Car(Vehicle):
+#     def __init__(self, brand, speed, doors):
+#         super().__init__(brand, speed)
+#         self.doors = doors
+
+# class Electric():
+#     def __init__(self, battery_life):
+#         self.battery_life = battery_life
+
+# class Tesla(Car, Electric):
+#     def __init__(self, brand, speed, doors, battery_life):
+#         Car.__init__(self, brand, speed, doors)
+#         Electric.__init__(self, battery_life)
+
+#     def describe(self):
+#         print(f"It is a {self.brand} with a top speed of {self.speed} km/h, {self.doors} doors, and a battery life of {self.battery_life} hours.")
+
+# tesla = Tesla(brand="Tesla", speed="250", doors=4, battery_life=500)
+# tesla.describe()
+
+# Library Management System 📚
+# 💡 Project Idea: Library Management System
+# A simple system where users can:
+# ✅ Borrow and return books
+# ✅ View available books
+# ✅ Manage different types of books (e.g., E-books and Physical books)
+
+# 🏗️ How to Structure the Code
+# 🔹 Base Class: Book
+# Attributes: title, author, genre
+# Method: describe() (prints book details)
+# 🔹 Subclasses:
+# 1️⃣ PhysicalBook (inherits from Book)
+
+# Extra attribute: shelf_location
+# Overrides describe() to include shelf location
+# 2️⃣ EBook (inherits from Book)
+
+# Extra attribute: file_size
+# Overrides describe() to include file size
+# 🔹 Library Class
+# Manages a collection of books
+# Allows adding, borrowing, and returning books
+# 🔹 User Class
+# Can borrow and return books
+# 🔹 Duck Typing:
+# The borrow_book() method should work for both PhysicalBook and EBook without checking their type explicitly.
+
+class Book():
+    def __init__(self, title, author, genre):
+        self.title = title
+        self.author = author
+        self.genre = genre
+        
+    def describe(self):
+        print(f"the title is {self.title}, the author is {self.author}, the genre is {self.genre}")
+
+class PhysicalBook(Book):
+    def __init__(self, title, author, genre, shelf_location):
+        super().__init__(title, author, genre)
+        self.shelf_location = shelf_location
+        
+    def describe(self):
+        super().describe()
+        print(f"the shelf location is {self.shelf_location}")
+
+class EBook(Book):
+    def __init__(self, title, author, genre, file_size):
+        super().__init__(title, author, genre)
+        self.file_size = file_size
+        
+    def describe(self):
+        super().describe()
+        print(f"the file size is {self.file_size} MB")
+
+class Library():
+    def __init__(self):
+        self.books = []
+        
+    def add_book(self, book):
+        self.books.append(book)
+        
+    def view_book(self):
+        if not self.books:
+            print("The library has no books.")
+        for book in self.books:
+            book.describe()
+
+class User():
+    def __init__(self, name):
+        self.name = name
+        self.borrowed_books = []
+        
+    def borrow_book(self, library, book_title):
+        for book in library.books:
+            if book.title == book_title:
+                self.borrowed_books.append(book)
+                library.books.remove(book)
+                print(f"{self.name} borrowed {book_title}")
+                return  
+        print(f"Sorry, {book_title} is not available in the library.")
+
+    def return_book(self, library, book_title):
+        for book in self.borrowed_books:
+            if book.title == book_title:
+                self.borrowed_books.remove(book)
+                library.add_book(book)
+                print(f"{self.name} returned {book_title}")
+                return  
+        print(f"{self.name} does not have {book_title}")
+
+def main():
+    library = Library()
+    user = User(name=input("Enter your name: "))
+    
+    library.add_book(PhysicalBook("1984", "George Orwell", "Dystopian", "A1"))
+    library.add_book(EBook("Python 101", "John Doe", "Programming", 5))
+    
+    while True:
+        print("\n Library Menu")
+        print("1. View Books")
+        print("2. Borrow a Book")
+        print("3. Return a Book")
+        print("4. Exit")
+
+        choice = input("Enter your choice: ") 
+
+        if choice == "1":
+            library.view_book()
+        elif choice == "2":
+            book_title = input("Enter the book title: ")
+            user.borrow_book(library, book_title) 
+        elif choice == "3":
+            book_title = input("Enter the book title: ")
+            user.return_book(library, book_title)  
+        elif choice == "4":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice, please try again.")
+
+if __name__ == "__main__":
+    main()
