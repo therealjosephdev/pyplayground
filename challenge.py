@@ -211,98 +211,210 @@
 # 🔹 Duck Typing:
 # The borrow_book() method should work for both PhysicalBook and EBook without checking their type explicitly.
 
-class Book():
-    def __init__(self, title, author, genre):
-        self.title = title
-        self.author = author
-        self.genre = genre
+# class Book():
+#     def __init__(self, title, author, genre):
+#         self.title = title
+#         self.author = author
+#         self.genre = genre
         
-    def describe(self):
-        print(f"the title is {self.title}, the author is {self.author}, the genre is {self.genre}")
+#     def describe(self):
+#         print(f"the title is {self.title}, the author is {self.author}, the genre is {self.genre}")
 
-class PhysicalBook(Book):
-    def __init__(self, title, author, genre, shelf_location):
-        super().__init__(title, author, genre)
-        self.shelf_location = shelf_location
+# class PhysicalBook(Book):
+#     def __init__(self, title, author, genre, shelf_location):
+#         super().__init__(title, author, genre)
+#         self.shelf_location = shelf_location
         
-    def describe(self):
-        super().describe()
-        print(f"the shelf location is {self.shelf_location}")
+#     def describe(self):
+#         super().describe()
+#         print(f"the shelf location is {self.shelf_location}")
 
-class EBook(Book):
-    def __init__(self, title, author, genre, file_size):
-        super().__init__(title, author, genre)
-        self.file_size = file_size
+# class EBook(Book):
+#     def __init__(self, title, author, genre, file_size):
+#         super().__init__(title, author, genre)
+#         self.file_size = file_size
         
-    def describe(self):
-        super().describe()
-        print(f"the file size is {self.file_size} MB")
+#     def describe(self):
+#         super().describe()
+#         print(f"the file size is {self.file_size} MB")
 
-class Library():
-    def __init__(self):
-        self.books = []
+# class Library():
+#     def __init__(self):
+#         self.books = []
         
-    def add_book(self, book):
-        self.books.append(book)
+#     def add_book(self, book):
+#         self.books.append(book)
         
-    def view_book(self):
-        if not self.books:
-            print("The library has no books.")
-        for book in self.books:
-            book.describe()
+#     def view_book(self):
+#         if not self.books:
+#             print("The library has no books.")
+#         for book in self.books:
+#             book.describe()
 
-class User():
-    def __init__(self, name):
-        self.name = name
-        self.borrowed_books = []
+# class User():
+#     def __init__(self, name):
+#         self.name = name
+#         self.borrowed_books = []
         
-    def borrow_book(self, library, book_title):
-        for book in library.books:
-            if book.title == book_title:
-                self.borrowed_books.append(book)
-                library.books.remove(book)
-                print(f"{self.name} borrowed {book_title}")
-                return  
-        print(f"Sorry, {book_title} is not available in the library.")
+#     def borrow_book(self, library, book_title):
+#         for book in library.books:
+#             if book.title == book_title:
+#                 self.borrowed_books.append(book)
+#                 library.books.remove(book)
+#                 print(f"{self.name} borrowed {book_title}")
+#                 return  
+#         print(f"Sorry, {book_title} is not available in the library.")
 
-    def return_book(self, library, book_title):
-        for book in self.borrowed_books:
-            if book.title == book_title:
-                self.borrowed_books.remove(book)
-                library.add_book(book)
-                print(f"{self.name} returned {book_title}")
-                return  
-        print(f"{self.name} does not have {book_title}")
+#     def return_book(self, library, book_title):
+#         for book in self.borrowed_books:
+#             if book.title == book_title:
+#                 self.borrowed_books.remove(book)
+#                 library.add_book(book)
+#                 print(f"{self.name} returned {book_title}")
+#                 return  
+#         print(f"{self.name} does not have {book_title}")
+
+# def main():
+#     library = Library()
+#     user = User(name=input("Enter your name: "))
+    
+#     library.add_book(PhysicalBook("1984", "George Orwell", "Dystopian", "A1"))
+#     library.add_book(EBook("Python 101", "John Doe", "Programming", 5))
+    
+#     while True:
+#         print("\n Library Menu")
+#         print("1. View Books")
+#         print("2. Borrow a Book")
+#         print("3. Return a Book")
+#         print("4. Exit")
+
+#         choice = input("Enter your choice: ") 
+
+#         if choice == "1":
+#             library.view_book()
+#         elif choice == "2":
+#             book_title = input("Enter the book title: ")
+#             user.borrow_book(library, book_title) 
+#         elif choice == "3":
+#             book_title = input("Enter the book title: ")
+#             user.return_book(library, book_title)  
+#         elif choice == "4":
+#             print("Goodbye!")
+#             break
+#         else:
+#             print("Invalid choice, please try again.")
+
+# if __name__ == "__main__":
+#     main()
+
+#
+
+# class BankAccount:
+#     def __init__(self, balance=0):
+#         self.balance = balance
+
+#     def deposit(self, amount):
+#         if amount > 0:
+#             self.balance += amount
+#             print(f"Deposited: ${amount}")
+#         else:
+#             print("Deposit amount must be positive.")
+
+#     def withdraw(self, amount):
+#         if amount > 0:
+#             if self.balance >= amount:
+#                 self.balance -= amount
+#                 print(f"Withdrawn: ${amount}")
+#             else:
+#                 print("Insufficient balance.")
+#         else:
+#             print("Withdrawal amount must be positive.")
+
+#     def __str__(self):
+#         return f"Balance: ${self.balance}"
+
+
+# account = BankAccount()
+# account.deposit(100)
+# account.withdraw(50)
+# print(account)
+
+#
+
+# Modify the BankAccount class with the following requirements:
+
+# Use @property for balance retrieval (so account.balance works but account.balance = 100 does not).
+# Create a decorator called transaction_logger that logs deposits and withdrawals.
+# Handle exceptions properly:
+# Raise a ValueError for negative deposits/withdrawals.
+# Catch any unexpected errors and print "An error occurred!".
+
+
+class BankAccount:
+    def __init__(self, balance=0):
+        self._balance = balance
+
+    @property
+    def balance(self):
+        return self._balance
+
+    def transaction_logger(func):
+        def wrapper(self, amount):
+            try:
+                if amount < 0:
+                    raise ValueError(f"{func.__name__.capitalize()} amount must be positive.")
+                result = func(self, amount)  # Call the actual function
+                
+                # Only log successful transactions
+                if result is not False:  
+                    print(f"Transaction: {func.__name__} ${amount}")
+                
+                return result
+            except ValueError as e:
+                print(e)
+            except Exception as e:
+                print("An error occurred!", e)
+        return wrapper
+
+    @transaction_logger
+    def deposit(self, amount):
+        self._balance += amount
+        print(f"Deposited: ${amount}")
+
+    @transaction_logger
+    def withdraw(self, amount):
+        if self._balance >= amount:
+            self._balance -= amount
+            print(f"Withdrawn: ${amount}")
+        else:
+            print("Insufficient balance.")
+            return False 
 
 def main():
-    library = Library()
-    user = User(name=input("Enter your name: "))
-    
-    library.add_book(PhysicalBook("1984", "George Orwell", "Dystopian", "A1"))
-    library.add_book(EBook("Python 101", "John Doe", "Programming", 5))
+    account = BankAccount(200)
     
     while True:
-        print("\n Library Menu")
-        print("1. View Books")
-        print("2. Borrow a Book")
-        print("3. Return a Book")
+        print("\n=== Bank Account Menu ===")
+        print("1. Check Balance")
+        print("2. Deposit Money")
+        print("3. Withdraw Money")
         print("4. Exit")
-
-        choice = input("Enter your choice: ") 
-
+        
+        choice = input("Enter your choice: ")
+        
         if choice == "1":
-            library.view_book()
+            print(f"your balance: ${account.balance}")
         elif choice == "2":
-            book_title = input("Enter the book title: ")
-            user.borrow_book(library, book_title) 
+            amount = float(input("Enter deposit amount: "))
+            account.deposit(amount)
         elif choice == "3":
-            book_title = input("Enter the book title: ")
-            user.return_book(library, book_title)  
+            amount = float(input("Enter withdrawal amount: "))
+            account.withdraw(amount)
         elif choice == "4":
-            print("Goodbye!")
+            print("Thank you for using the bank system. Goodbye!")
             break
         else:
             print("Invalid choice, please try again.")
-
+            
 if __name__ == "__main__":
     main()
