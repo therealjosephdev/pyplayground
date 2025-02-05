@@ -350,71 +350,94 @@
 # Catch any unexpected errors and print "An error occurred!".
 
 
-class BankAccount:
-    def __init__(self, balance=0):
-        self._balance = balance
+# class BankAccount:
+#     def __init__(self, balance=0):
+#         self._balance = balance
 
-    @property
-    def balance(self):
-        return self._balance
+#     @property
+#     def balance(self):
+#         return self._balance
 
-    def transaction_logger(func):
-        def wrapper(self, amount):
-            try:
-                if amount < 0:
-                    raise ValueError(f"{func.__name__.capitalize()} amount must be positive.")
-                result = func(self, amount)  # Call the actual function
+#     def transaction_logger(func):
+#         def wrapper(self, amount):
+#             try:
+#                 if amount < 0:
+#                     raise ValueError(f"{func.__name__.capitalize()} amount must be positive.")
+#                 result = func(self, amount)  # Call the actual function
                 
-                # Only log successful transactions
-                if result is not False:  
-                    print(f"Transaction: {func.__name__} ${amount}")
+#                 # Only log successful transactions
+#                 if result is not False:  
+#                     print(f"Transaction: {func.__name__} ${amount}")
                 
-                return result
-            except ValueError as e:
-                print(e)
-            except Exception as e:
-                print("An error occurred!", e)
-        return wrapper
+#                 return result
+#             except ValueError as e:
+#                 print(e)
+#             except Exception as e:
+#                 print("An error occurred!", e)
+#         return wrapper
 
-    @transaction_logger
-    def deposit(self, amount):
-        self._balance += amount
-        print(f"Deposited: ${amount}")
+#     @transaction_logger
+#     def deposit(self, amount):
+#         self._balance += amount
+#         print(f"Deposited: ${amount}")
 
-    @transaction_logger
-    def withdraw(self, amount):
-        if self._balance >= amount:
-            self._balance -= amount
-            print(f"Withdrawn: ${amount}")
-        else:
-            print("Insufficient balance.")
-            return False 
+#     @transaction_logger
+#     def withdraw(self, amount):
+#         if self._balance >= amount:
+#             self._balance -= amount
+#             print(f"Withdrawn: ${amount}")
+#         else:
+#             print("Insufficient balance.")
+#             return False 
 
-def main():
-    account = BankAccount(200)
+# def main():
+#     account = BankAccount(200)
     
-    while True:
-        print("\n=== Bank Account Menu ===")
-        print("1. Check Balance")
-        print("2. Deposit Money")
-        print("3. Withdraw Money")
-        print("4. Exit")
+#     while True:
+#         print("\n=== Bank Account Menu ===")
+#         print("1. Check Balance")
+#         print("2. Deposit Money")
+#         print("3. Withdraw Money")
+#         print("4. Exit")
         
-        choice = input("Enter your choice: ")
+#         choice = input("Enter your choice: ")
         
-        if choice == "1":
-            print(f"your balance: ${account.balance}")
-        elif choice == "2":
-            amount = float(input("Enter deposit amount: "))
-            account.deposit(amount)
-        elif choice == "3":
-            amount = float(input("Enter withdrawal amount: "))
-            account.withdraw(amount)
-        elif choice == "4":
-            print("Thank you for using the bank system. Goodbye!")
-            break
-        else:
-            print("Invalid choice, please try again.")
+#         if choice == "1":
+#             print(f"your balance: ${account.balance}")
+#         elif choice == "2":
+#             amount = float(input("Enter deposit amount: "))
+#             account.deposit(amount)
+#         elif choice == "3":
+#             amount = float(input("Enter withdrawal amount: "))
+#             account.withdraw(amount)
+#         elif choice == "4":
+#             print("Thank you for using the bank system. Goodbye!")
+#             break
+#         else:
+#             print("Invalid choice, please try again.")
             
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
+ 
+# Write to the file
+# def write_scores_to_file():
+#     try:
+#         with open(file_path, "w") as file:
+#             for employee in employees:
+#                 file.write(f"{employee[0]}: {employee[1]}\n")
+#         print(f"student_scores file '{file_path}' was created successfully.")
+#     except Exception as e:
+#         print(f"An error occurred while writing the file: {e}")
+
+# # Read from the file
+# def read_scores_from_file():
+#     try:
+#         with open(file_path, "r") as file:
+#             output = file.read()
+#         print(output)
+#     except FileNotFoundError:
+#         print(f"File '{file_path}' not found!")
+#     except PermissionError:
+#         print("Permission is needed to read the file!")
+#     except Exception as e:
+#         print(f"An error occurred while reading the file: {e}")
